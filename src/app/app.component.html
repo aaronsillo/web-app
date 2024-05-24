@@ -1,1 +1,34 @@
-<router-outlet></router-outlet>
+<table mat-table [dataSource]="dataTable" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element._id}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nombre </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="nit">
+        <th mat-header-cell *matHeaderCellDef> NIT </th>
+        <td mat-cell *matCellDef="let element"> {{element.nit}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef> Edad </th>
+        <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<br><br>
+<form [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+    <label for="name">Nombre: </label>
+    <input id="name" type="text" formControlName="name">
+    <label for="nit">NIT: </label>
+    <input id="nit" type="text" formControlName="nit">
+    <label for="age">Edad: </label>
+    <input id="age" type="text" formControlName="age">
+    <button type="submit" [disabled]="!clientForm.valid">Guardar</button>
+</form>
